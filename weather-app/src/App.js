@@ -7,8 +7,10 @@ const API_KEY = "889a5ef41ebfe5408f85f8b1883567dd";
 class App extends React.Component{
   getWeather = async (e) => {
     e.preventDefault();
+    const city = e.target.elements.city.value;
+    const country = e.target.elements.country.value;
 
-    const api_call = await fetch(`http://openweathermap.org/data/2.5/weather?q=London,uk&appid=${API_KEY}&units=metric`, {mode: "no-cors"})
+    const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&APPID=${API_KEY}&units=metric`, {mode: "no-cors"});
     
     const data = await api_call.json();
 
