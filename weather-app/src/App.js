@@ -11,6 +11,7 @@ class App extends React.Component{
     city: undefined,
     country: undefined,
     humidity: undefined,
+    windspeed: undefined,
     description: undefined,
     error: undefined
   }
@@ -23,12 +24,15 @@ class App extends React.Component{
     
     const data = await api_call.json();
 
+    console.log(data)
+
     if (city && country){
       this.setState({
         temperature: data.main.temp,
         city: data.name,
         country: data.sys.country,
         humidity: data.main.humidity,
+        windspeed: data.wind.speed,
         description: data.weather[0].description,
         error: ""
       });
@@ -38,6 +42,7 @@ class App extends React.Component{
         city: undefined,
         country: undefined,
         humidity: undefined,
+        windspeed: undefined,
         description: undefined, 
         error: "please enter a value"
       });
@@ -54,6 +59,7 @@ class App extends React.Component{
           city={this.state.city}
           country={this.state.country}
           humidity={this.state.humidity}
+          windspeed={this.state.windspeed}
           description={this.state.description}
           error={this.state.error}
         />
