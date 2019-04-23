@@ -5,9 +5,29 @@ import { NavLink } from 'react-router-dom';
 const Navigation = () => {
   return (
     <div>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/about">About</NavLink>
-      <NavLink to="/contact">Contact</NavLink>
+      <ul>
+        <li>
+          <NavLink to="/" exact activeStyle={
+            {color:'green'}
+          }>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/about" exact activeStyle={
+            {color:'green'}
+          }>About</NavLink>
+        </li>
+        <li>
+          <NavLink to="/contact" exact activeStyle={
+            {color:'green'}
+          }>Contact</NavLink>
+        </li>
+        <li>
+          <NavLink to="/user/john" exact activeStyle={
+            {color:'green'}
+          }>User John</NavLink>
+        </li>
+      </ul>
+      
     </div>
   );
 };
