@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, Prompt} from 'react-router-dom';
 
 import  Home  from './components/Home';
 import  About  from './components/About';
@@ -14,7 +14,9 @@ class App extends Component {
   }
 
   loginHandle = () => {
-    this.setState({loggedIn:  true})
+    this.setState(prevState => ({
+      loggedIn:  !prevState.loggedIn
+    }))
   }
   render() {
     return (
@@ -30,7 +32,13 @@ class App extends Component {
             )} />
             <Route component={Error} />
           </Switch>
-        <input type="button" value="log in" onClick={this.loginHandle.bind(this)}></input>
+        <input type="button" value={this.state.loggedIn ? "log out" : "log in"} onClick={this.loginHandle.bind(this)}></input>
+        <Prompt
+          when={!this.state.loggedIn}
+          message={(location)=>{
+            return location.pathname.startsWith('/user') ? 'Are you sure you want to leave this page' : true
+          }}
+        />
       </div>
      </BrowserRouter>
     );
