@@ -3,14 +3,17 @@ import './App.css';
 import axios from 'axios'
 
 import UserForm from './components/UserForm'
+import Profile from "./components/Profile"
 
 class App extends React.Component{
   state = {
-    name: null,
-    company: null,
-    bio: null,
-    location: null,
-    repos: null
+    name: undefined,
+    company: undefined,
+    bio: undefined,
+    location: undefined,
+    repos: undefined,
+    url: undefined,
+    avatar: undefined
   }
 
   getUser = (e) => {
@@ -24,14 +27,17 @@ class App extends React.Component{
         const company = res.data.company;
         const bio = res.data.bio;
         const location = res.data.location;
-
+        const url = res.data.html_url;
+        const avatar = res.data.avatar_url
 
         this.setState({
           repos,
           name,
           company,
           bio,
-          location
+          location,
+          url,
+          avatar
         })
       })
     } else return
@@ -44,12 +50,15 @@ class App extends React.Component{
           <h1 className="App-title">Github Info App</h1>
         </header>
         <UserForm getUser={this.getUser} />
-        {this.state.repos ? <p>number of repos is : {this.state.repos}</p> : <p>please enter a username</p>}
-        {this.state.name ? <p>name : {this.state.name}</p> : <p></p>}
-        {this.state.company ? <p>company : {this.state.company}</p> : <p></p>}
-        {this.state.bio ? <p>bio : {this.state.bio}</p> : <p></p>}
-        {this.state.location ? <p>location : {this.state.location}</p> : <p></p>}
-
+        <Profile
+          repos={this.state.repos}
+          name={this.state.name}
+          company={this.state.company}
+          bio={this.state.bio}
+          location={this.state.location}
+          url={this.state.url}
+          avatar={this.state.avatar}
+        />
       </div>
     );
   }
