@@ -23,9 +23,9 @@ class App extends Component {
 
     const newItem = {
       id:this.state.id,
-      item:this.state.item
+      title:this.state.item
     }
-    console.log("newItem", newItem)
+
     const updateItems = [...this.state.items, newItem]
 
     this.setState({
@@ -47,7 +47,7 @@ class App extends Component {
             item={this.state.item} 
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}/>
-            <TodoList />
+            <TodoList items={this.state.items}/>
           </div>
         </div>
       </div>
