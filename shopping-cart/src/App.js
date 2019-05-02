@@ -3,6 +3,7 @@ import {Container} from 'react-bootstrap';
 
 import SubTotal from './components/Subtotal/Subtotal'
 import PickupSavings from './components/PickupSavings/PickupSavings';
+import TaxFees from './components/TaxFees/TaxFees';
 
 import './App.css';
 
@@ -12,7 +13,8 @@ class App extends Component {
 
     this.state = {
       total: 200,
-      pickupSavings: -3.85
+      pickupSavings: -3.85,
+      taxes: 0
     }
   }
  
@@ -22,6 +24,7 @@ class App extends Component {
         <Container className="purchase-card">
           <SubTotal price={this.state.total.toFixed(2)} />
           <PickupSavings price={this.state.pickupSavings} />
+          <TaxFees taxes={this.state.taxes.toFixed(2)} />
         </Container>
       </div>
     );
