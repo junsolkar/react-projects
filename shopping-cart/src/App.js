@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
 import {Container} from 'react-bootstrap';
 
-import SubTotal from './components/Subtotal/Subtotal'
+import SubTotal from './components/Subtotal/Subtotal';
 import PickupSavings from './components/PickupSavings/PickupSavings';
 import TaxFees from './components/TaxFees/TaxFees';
-import EstimatedTotal from './components/EstimatedTotal/EstimatedTotal'
-import ItemDetails  from './components/ItemDetails/ItemDetails'
-import PromoCode from './components/PromoCode/PromoCode'
+import EstimatedTotal from './components/EstimatedTotal/EstimatedTotal';
+import ItemDetails  from './components/ItemDetails/ItemDetails';
+import PromoCode from './components/PromoCode/PromoCode';
 import './App.css';
+
+import { connect } from 'react-redux';
+import { handleChange } from './actions/promoCodeActions';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      total: 200,
+      total: 200.0,
       pickupSavings: -3.85,
       taxes: 0,
       estimatedTotal: 0,
@@ -23,9 +26,8 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    this.setState({
-      taxes: (this.state.total + this.state.PickupSavings) * 0.0875
-    },
+    this.setState(
+      { taxes: (this.state.total + this.state.pickupSavings) * 0.0875 },
     function(){
       this.setState({
         estimatedTotal:
@@ -33,6 +35,20 @@ class App extends Component {
       });
     }
     );
+  };
+
+  giveDiscountHandler = () => {
+    if(this.props.promoCode === 'DISCOUNT'){
+      this.setState({
+        estimatedTotal: this.state.estimatedTotal * 0.9
+      },
+      function(){
+        this.setState({
+          disablePromoButton: true
+        });
+      }
+      );
+    }
   };
  
   render(){
@@ -48,12 +64,15 @@ class App extends Component {
           <hr />
           <PromoCode 
           giveDiscount={() => this.giveDiscountHandler()}
-          isDisabled={this.props.disablePromoButton}
+          isDisabled={this.state.disablePromoButton}
           />
         </Container>
       </div>
     );
   }
 }
+const mapStateToProps = state => ({
+  promoCode: state.promoCode.value
+});
 
-export default App;
+export default connect(mapStateToProps, {handleChange})(App);
