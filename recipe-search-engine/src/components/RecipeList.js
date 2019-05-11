@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
+import Recipe  from './Recipe'
+import RecipeSearch  from './RecipeSearch'
+
+
 
 export default class RecipeList extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <React.Fragment>
+      <h1>
+      From Recipe List
+      </h1>
+      <RecipeSearch />
+      <Recipe />
+      </React.Fragment>
     )
   }
 }
