@@ -9,7 +9,8 @@ class App extends Component {
   state = {
     recipes: recipes,
     url: "https://www.food2fork.com/api/search?key=5a84e3f5e7686b5a63954ee059213ae8",
-    details_id:35380
+    details_id:35380,
+    pageIndex:1
   }
   async getRecipes(){
       try {
@@ -28,12 +29,20 @@ class App extends Component {
     this.getRecipes()
   }
 
+  displayPage = (index) => {
+    switch(index){
+      default:
+      case 1:
+        return (<RecipeList recipes={this.state.recipes} />)
+      case 0:
+        return (<RecipeDetails id={this.state.details_id} />)
+    }
+  }
+
   render(){
-    console.log(this.state.recipes)
     return (
       <React.Fragment>
-        <RecipeList recipes={this.state.recipes}/>
-        <RecipeDetails  id={this.state.details_id}/>
+        {this.displayPage(this.state.pageIndex)}
       </React.Fragment>
     );
   }
