@@ -7,10 +7,10 @@ import RecipeSearch  from './RecipeSearch'
 export default class RecipeList extends Component {
 
   render() {
-    const { recipes, handleDetails } = this.props;
+    const { recipes, handleDetails, value, handleSubmit, handleChange } = this.props;
     return (
       <React.Fragment>
-      <RecipeSearch />
+      <RecipeSearch value={value} handleChange={handleChange} handleSubmit={handleSubmit}/>
       <div className="container my-5">
         <div className="row">
           <div className="col-10 mx-auto col-md-6 text-center text-uppercase mb-3">

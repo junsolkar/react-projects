@@ -33,7 +33,13 @@ class App extends Component {
     switch(index){
       default:
       case 1:
-        return (<RecipeList recipes={this.state.recipes} handleDetails={this.handleDetails}/>)
+        return (<RecipeList 
+                  recipes={this.state.recipes} 
+                  handleDetails={this.handleDetails}
+                  value={this.state.search}
+                  handleChange={this.handleChange}
+                  handleSubmit={this.handleSubmit}
+                  />)
       case 0:
         return (<RecipeDetails id={this.state.details_id} handleIndex={this.handleIndex}/>)
     }
@@ -50,6 +56,15 @@ class App extends Component {
       pageIndex: index,
       details_id: id,
     });
+  }
+
+  handleChange = (e) => {
+    console.log("hc")
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("hs")
   }
   render(){
     return (
