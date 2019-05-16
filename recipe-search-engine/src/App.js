@@ -33,12 +33,24 @@ class App extends Component {
     switch(index){
       default:
       case 1:
-        return (<RecipeList recipes={this.state.recipes} />)
+        return (<RecipeList recipes={this.state.recipes} handleDetails={this.handleDetails}/>)
       case 0:
-        return (<RecipeDetails id={this.state.details_id} />)
+        return (<RecipeDetails id={this.state.details_id} handleIndex={this.handleIndex}/>)
     }
   }
 
+  handleIndex = index =>{
+    this.setState({
+      pageIndex: index
+    });
+  }
+
+  handleDetails = (index, id) => {
+    this.setState({
+      pageIndex: index,
+      details_id: id,
+    });
+  }
   render(){
     return (
       <React.Fragment>
