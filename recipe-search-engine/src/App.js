@@ -9,8 +9,11 @@ class App extends Component {
   state = {
     recipes: recipes,
     url: "https://www.food2fork.com/api/search?key=5a84e3f5e7686b5a63954ee059213ae8",
+    base_url:"https://www.food2fork.com/api/search?key=5a84e3f5e7686b5a63954ee059213ae8",
     details_id:35380,
-    pageIndex:1
+    pageIndex:1,
+    search:"",
+    query:'&q='
   }
   async getRecipes(){
       try {
@@ -25,9 +28,9 @@ class App extends Component {
       }
   }
 
-  // componentDidMount(){
-  //   this.getRecipes()
-  // }
+  componentDidMount(){
+    this.getRecipes()
+  }
 
   displayPage = (index) => {
     switch(index){
@@ -59,12 +62,19 @@ class App extends Component {
   }
 
   handleChange = (e) => {
-    console.log("hc")
+    this.setState({
+      search:e.target.value
+    })
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("hs")
+    const{base_url,query,search} = this.state;
+    this.setState(() => {
+      return {url: `${base_url}${query}${search}`, search:""}
+    },() => {
+      this.getRecipes();
+    })
   }
   render(){
     return (
