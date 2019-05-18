@@ -30,7 +30,8 @@ class App extends Component {
         } else {
           this.setState(() => {
             return {
-              recipes:jsonData.recipes
+              recipes:jsonData.recipes,
+              error:""
             }
           })
         }
